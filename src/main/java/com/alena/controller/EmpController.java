@@ -17,7 +17,7 @@ public class EmpController {
 
     private EmployeeService employeeService;
 
-    @RequestMapping("/")
+    @RequestMapping("/showAllEmp")
     public String showAllEmp(Model model){
         List<Employee> allEmployees
                 = employeeService.getAllEmployees();
@@ -25,27 +25,27 @@ public class EmpController {
         return "allEmployees";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/addNewEmployee")
     public String addNewEmployee(Model model){
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
         return "employee-info";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute("employee") Employee employee){
         employeeService.saveEmployee(employee);
         return "redirect:/";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/updateEmployee")
     public String updateEmployee(@RequestParam("empid") int id, Model model){
         Employee employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
         return "employee-info";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/deleteEmployee")
     public String deleteEmployee(@RequestParam("empid") int id){
         employeeService.deleteEmployee(id);
         return "redirect:/";
